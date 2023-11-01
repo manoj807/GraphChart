@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.valleytech.graphchart">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="false"
+        android:hardwareAccelerated="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name="com.valleytech.graphchart.notimportant.MainActivity"
+            android:label="@string/app_name"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.valleytech.graphchart.LineChartActivity1" />
+        <activity android:name="com.valleytech.graphchart.LineChartActivity2" />
+        <activity android:name="com.valleytech.graphchart.LineChartTime" />
+        <activity android:name="com.valleytech.graphchart.BarChartActivity" />
+		<activity android:name="com.valleytech.graphchart.HorizontalBarChartActivity" />
+        <activity android:name="com.valleytech.graphchart.HorizontalBarNegativeChartActivity" />
+        <activity android:name="com.valleytech.graphchart.PieChartActivity" />
+        <activity android:name="com.valleytech.graphchart.PiePolylineChartActivity" />
+        <activity android:name="com.valleytech.graphchart.MultiLineChartActivity" />
+        <activity android:name="com.valleytech.graphchart.BarChartActivityMultiDataset" />
+        <activity android:name="com.valleytech.graphchart.DrawChartActivity" />
+        <activity android:name="com.valleytech.graphchart.ScatterChartActivity" />
+        <activity android:name="com.valleytech.graphchart.BubbleChartActivity" />
+        <activity android:name="com.valleytech.graphchart.fragments.SimpleChartDemo" />
+        <activity android:name="com.valleytech.graphchart.ListViewBarChartActivity" />
+        <activity android:name="com.valleytech.graphchart.ListViewMultiChartActivity" />
+        <activity android:name="com.valleytech.graphchart.StackedBarActivity" />
+        <activity android:name="com.valleytech.graphchart.AnotherBarActivity" />
+        <activity android:name="com.valleytech.graphchart.InvertedLineChartActivity" />
+        <activity android:name="com.valleytech.graphchart.CandleStickChartActivity" />
+        <activity android:name="com.valleytech.graphchart.CubicLineChartActivity" />
+        <activity android:name="com.valleytech.graphchart.RadarChartActivity" />
+        <activity android:name="com.valleytech.graphchart.LineChartActivityColored" />
+        <activity android:name="com.valleytech.graphchart.DynamicalAddingActivity" />
+        <activity android:name="com.valleytech.graphchart.RealtimeLineChartActivity" />
+        <activity android:name="com.valleytech.graphchart.CombinedChartActivity" />
+        <activity android:name="com.valleytech.graphchart.PerformanceLineChart" />
+        <activity android:name="com.valleytech.graphchart.BarChartActivitySinus" />
+        <activity android:name="com.valleytech.graphchart.ScrollViewActivity" />
+        <activity android:name="com.valleytech.graphchart.StackedBarActivityNegative" />
+        <activity android:name="com.valleytech.graphchart.BarChartPositiveNegative" />
+        <activity android:name="com.valleytech.graphchart.FilledLineActivity" />
+        <activity android:name="com.valleytech.graphchart.HalfPieChartActivity" />
+    </application>
+
+</manifest>

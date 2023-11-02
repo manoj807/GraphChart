@@ -14,9 +14,11 @@ import android.widget.ListView;
 
 import com.github.mikephil.charting.utils.Utils;
 import com.valleytech.graphchart.AnotherBarActivity;
+import com.valleytech.graphchart.AnotherDataBarActivity;
 import com.valleytech.graphchart.BarChartActivity;
 import com.valleytech.graphchart.BarChartActivityMultiDataset;
 import com.valleytech.graphchart.BarChartActivitySinus;
+import com.valleytech.graphchart.BarChartPositiveActivity;
 import com.valleytech.graphchart.BarChartPositiveNegative;
 import com.valleytech.graphchart.BubbleChartActivity;
 import com.valleytech.graphchart.CandleStickChartActivity;
@@ -123,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         objects.add(35, new ContentItem("Dynamic", "Build a line chart by adding points and sets."));
         objects.add(36, new ContentItem("Realtime", "Add data points in realtime."));
         objects.add(37, new ContentItem("Hourly", "Uses the current time to add a data point for each hour."));
+        objects.add(38, new ContentItem("MKDemo", "Demo."));
+        objects.add(39, new ContentItem("Positive", "Demo."));
+
         //objects.add(38, new ContentItem("Realm.io Examples", "See more examples that use Realm.io mobile database."));
 
         MyAdapter adapter = new MyAdapter(this, objects);
@@ -234,6 +239,12 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
             case 37:
                 i = new Intent(this, LineChartTime.class);
+                break;
+            case 38:
+                i = new Intent(this, AnotherDataBarActivity.class);
+                break;
+            case 39:
+                i = new Intent(this, BarChartPositiveActivity.class);
                 break;
             /*case 38:
                 i = new Intent(this, RealmMainActivity.class);

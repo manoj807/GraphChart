@@ -55,7 +55,7 @@
         <activity android:name="com.valleytech.graphchart.HalfPieChartActivity" />
         <activity android:name="com.valleytech.graphchart.AnotherDataBarActivity" />
         <activity android:name="com.valleytech.graphchart.BarChartPositiveActivity" />
-
+        <activity android:name="com.valleytech.graphchart.LineChartActivity3" />
     </application>
 
 </manifest>

@@ -3,14 +3,11 @@ package com.valleytech.graphchart;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.RectF;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
-import android.widget.SeekBar;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
@@ -22,10 +19,14 @@ import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.interfaces.datasets.IDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.MPPointF;
+import com.github.mikephil.charting.renderer.XAxisRenderer;
 import com.github.mikephil.charting.utils.ViewPortHandler;
+import com.valleytech.graphchart.custom.BarChartMarkerView;
+import com.valleytech.graphchart.custom.DayAxisValueFormatter;
 import com.valleytech.graphchart.notimportant.DemoBase;
+import com.valleytech.graphchart.utils.Data;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ import java.util.List;
 public class BarChartPositiveActivity extends DemoBase implements OnChartValueSelectedListener {
 
     private BarChart chart;
+    final List<Data> dataList =new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,18 +45,20 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
         setContentView(R.layout.activity_barchart_noseekbar);
 
         setTitle("BarChartPositiveNegative");
+        com.github.mikephil.charting.formatter.ValueFormatter xAxisFormatter = new DayAxisValueFormatter(chart);
 
         chart = findViewById(R.id.chart1);
         chart.setBackgroundColor(Color.WHITE);
         chart.setOnChartValueSelectedListener(this);
-
+        chart.getDescription().setText("Datadddd");
         chart.setExtraTopOffset(10f);
-        chart.setExtraBottomOffset(30f);
+        chart.setExtraBottomOffset(2f);
         chart.setExtraLeftOffset(12f);
         chart.setExtraRightOffset(12f);
 
         chart.setDrawBarShadow(false);
         chart.setDrawValueAboveBar(true);
+
 
         chart.getDescription().setEnabled(false);
 
@@ -68,13 +72,18 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
         xAxis.setTypeface(tfRegular);
         xAxis.setDrawGridLines(false);
         xAxis.setDrawAxisLine(false);
-        xAxis.setTextColor(Color.RED);
+        xAxis.setTextColor(Color.BLUE);
         xAxis.setTextSize(13f);
+
         //xAxis.setLabelCount(5);
         xAxis.setCenterAxisLabels(true);
         xAxis.setGranularity(1f);
         xAxis.setCenterAxisLabels(true);
-        xAxis.setXOffset(500f);
+        //xAxis.setXOffset(500f);
+        xAxis.setValueFormatter(xAxisFormatter);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setXOffset(100);
+        //xAxis.setAxisLineWidth(100);
 
 
 
@@ -88,35 +97,42 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
         left.setZeroLineColor(Color.GRAY);
         left.setZeroLineWidth(0.7f);
         chart.getAxisRight().setEnabled(false);
+
+
         chart.getLegend().setEnabled(false);
+        BarChartMarkerView mv = new BarChartMarkerView(this,xAxisFormatter);
+        mv.setChartView(chart); // For bounds control
+        chart.setMarker(mv);
 
         // THIS IS THE ORIGINAL DATA YOU WANT TO PLOT
-        final List<Data> data = new ArrayList<>();
-        data.add(new Data(0f, 224.1f, "1990"));
-        data.add(new Data(1f, 238.5f, "1993"));
-        data.add(new Data(2f, 1280.1f, "1994"));
-        data.add(new Data(3, 442.3f, "1997"));
-        data.add(new Data(4f, 442.3f, "1998"));
-        data.add(new Data(5f, 300.3f, "1999"));
-        data.add(new Data(6f, 300.3f, "2000"));
-        data.add(new Data(7f, 500.3f, "1990"));
-        data.add(new Data(8f, 2280.1f, "2019"));
 
-        xAxis.setLabelCount(data.size());
+        dataList.add(new Data(0f, 224.1f, "1990"));
+        dataList.add(new Data(1f, 238.5f, "1993"));
+        dataList.add(new Data(2f, 1280.1f, "1994"));
+        dataList.add(new Data(3, 442.3f, "1997"));
+        dataList.add(new Data(4f, 442.3f, "1998"));
+        dataList.add(new Data(5f, 300.3f, "1999"));
+        dataList.add(new Data(6f, 300.3f, "2000"));
+        dataList.add(new Data(7f, 500.3f, "1990"));
+        dataList.add(new Data(8f, 2280.1f, "2019"));
+
+        xAxis.setLabelCount(dataList.size());
+        xAxis.setEnabled(false);
+
 
         xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.ValueFormatter() {
             @Override
             public String getAxisLabel(float value, AxisBase axis) {
                 String st="";
 
-                if( value==data.size()-1) {
+               /* if( value== dataList.size()-1) {
 
-                        st = data.get((int) value).xAxisValue;
+                        st = dataList.get((int) value).xAxisValue;
 
                 }else if(value<0)
                 {
-                    st= data.get(0).xAxisValue;
-                }
+                    st= dataList.get(0).xAxisValue;
+                }*/
 
 
                 return st;
@@ -130,10 +146,10 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
             }
         });*/
 
-        setData(data);
+        setDataList(dataList);
     }
 
-    private void setData(List<Data> dataList) {
+    private void setDataList(List<Data> dataList) {
 
         ArrayList<BarEntry> values = new ArrayList<>();
         List<Integer> colors = new ArrayList<>();
@@ -144,11 +160,12 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
         for (int i = 0; i < dataList.size(); i++) {
 
             Data d = dataList.get(i);
-            BarEntry entry = new BarEntry(d.xValue, d.yValue);
+            BarEntry entry = new BarEntry(d.xValue, d.yValue,d);
             values.add(entry);
 
             // specific colors
             if (d.yValue >= 0)
+
                 colors.add(red);
             else
                 colors.add(green);
@@ -164,6 +181,8 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
             chart.notifyDataSetChanged();
         } else {
             set = new BarDataSet(values, "Values");
+            set.setDrawValues(false);
+            set.setHighLightColor(red);
             set.setColors(colors);
             set.setValueTextColors(colors);
             set.setBarBorderWidth(2);
@@ -172,20 +191,50 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
             BarData data = new BarData(set);
 
             data.setValueTextSize(13f);
+
             data.setValueTypeface(tfRegular);
             data.setValueFormatter(new ValueFormatter());
             data.setBarWidth(0.8f);
 
             chart.setData(data);
+
             chart.invalidate();
         }
     }
-    private final RectF onValueSelectedRectF = new RectF();
 
     @Override
     public void onValueSelected(Entry e, Highlight h) {
 
-        if (e == null)
+        BarDataSet set = (BarDataSet) chart.getData().getDataSetByIndex(0);
+        List<BarEntry> entryList= set.getValues();
+        Data data= (Data) e.getData();
+
+        for (BarEntry barEntry : entryList) {
+
+            barEntry.setIcon(null);
+            Data entryData=((Data)barEntry.getData());
+            if(!data.xAxisValue.equals(entryData.xAxisValue)) {
+
+                entryData.isSelected = false;
+
+            }
+            barEntry.setIcon(null);
+
+        }
+
+
+        data.isSelected=true;
+        e.setIcon(getResources().getDrawable(R.drawable.ic_city_tick));
+
+
+
+
+
+
+
+        chart.invalidate();
+
+       /* if (e == null)
             return;
 
         RectF bounds = onValueSelectedRectF;
@@ -199,29 +248,33 @@ public class BarChartPositiveActivity extends DemoBase implements OnChartValueSe
                 "low: " + chart.getLowestVisibleX() + ", high: "
                         + chart.getHighestVisibleX());
 
-        MPPointF.recycleInstance(position);
+        MPPointF.recycleInstance(position);*/
     }
 
     @Override
     public void onNothingSelected() {
+
+        BarDataSet set = (BarDataSet) chart.getData().getDataSetByIndex(0);
+        List<BarEntry> entryList= set.getValues();
+
+        for (BarEntry barEntry : entryList) {
+
+            barEntry.setIcon(null);
+            Data entryData=((Data)barEntry.getData());
+
+            entryData.isSelected = false;
+
+            barEntry.setIcon(null);
+
+        }
+
 
     }
 
     /**
      * Demo class representing data.
      */
-    private class Data {
 
-        final String xAxisValue;
-        final float yValue;
-        final float xValue;
-
-        Data(float xValue, float yValue, String xAxisValue) {
-            this.xAxisValue = xAxisValue;
-            this.yValue = yValue;
-            this.xValue = xValue;
-        }
-    }
 
     private class ValueFormatter extends com.github.mikephil.charting.formatter.ValueFormatter {
 

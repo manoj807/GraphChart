@@ -32,6 +32,7 @@ import com.valleytech.graphchart.HorizontalBarNegativeChartActivity;
 import com.valleytech.graphchart.InvertedLineChartActivity;
 import com.valleytech.graphchart.LineChartActivity1;
 import com.valleytech.graphchart.LineChartActivity2;
+import com.valleytech.graphchart.LineChartActivity3;
 import com.valleytech.graphchart.LineChartActivityColored;
 import com.valleytech.graphchart.LineChartTime;
 import com.valleytech.graphchart.ListViewBarChartActivity;
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
         objects.add(37, new ContentItem("Hourly", "Uses the current time to add a data point for each hour."));
         objects.add(38, new ContentItem("MKDemo", "Demo."));
         objects.add(39, new ContentItem("Positive", "Demo."));
-
+        objects.add(40, new ContentItem("Line Chart", "LineChartActivity3"));
         //objects.add(38, new ContentItem("Realm.io Examples", "See more examples that use Realm.io mobile database."));
 
         MyAdapter adapter = new MyAdapter(this, objects);
@@ -245,6 +246,10 @@ public class MainActivity extends AppCompatActivity implements OnItemClickListen
                 break;
             case 39:
                 i = new Intent(this, BarChartPositiveActivity.class);
+                break;
+
+            case 40:
+                i = new Intent(this, LineChartActivity3.class);
                 break;
             /*case 38:
                 i = new Intent(this, RealmMainActivity.class);
